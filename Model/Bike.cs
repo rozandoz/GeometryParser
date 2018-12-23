@@ -9,6 +9,7 @@ namespace GeometryParser.Model
 
         public string Brand { get; set; }
         public string Model { get; set; }
+        public string Url { get; set; }
         public string Year { get; set; }
 
         #endregion
