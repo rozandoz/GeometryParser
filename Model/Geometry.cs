@@ -13,6 +13,12 @@ namespace GeometryParser.Model
             Values = new List<GeometryValue>();
         }
 
+        public Geometry(string name)
+            : this()
+        {
+            Name = name;
+        }
+
         #endregion
 
         #region Properties

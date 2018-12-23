@@ -120,10 +120,20 @@ namespace GeometryParser.Web
 
         public static string GetRandomAgent()
         {
-            var random = new Random(DateTime.Now.Millisecond);
-            return All[random.Next(All.Count)];
+            return All[_random.Next(0, All.Count)];
         }
 
         #endregion
+
+        #region Constructors
+
+        static UserAgents()
+        {
+            _random = new Random();
+        }
+
+        #endregion
+
+        private static readonly Random _random;
     }
 }
