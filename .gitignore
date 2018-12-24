@@ -6,4 +6,7 @@
 /obj
 /.vs
 /packages
-/GeometryParser/obj/Debug
+/GeometryParser/obj
+/GeometryParser/bin
+/GeometryParser.DAL/obj
+/GeometryParser.DAL/bin
