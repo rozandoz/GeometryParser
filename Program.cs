@@ -18,24 +18,44 @@ namespace GeometryParser
             webClient.UpdateAll();
 
             var bikes = bikesList.Bikes;
-            var index = Math.Max(0, bikes.FindIndex(b => b.Geometries.Count == 0) - 1);
+
+            var index = Math.Max(0, bikes.FindIndex(b => b.Geometries.Count == 0));
 
             while (index < bikes.Count)
             {
+                var bike = bikes[index];
+
+                if (bike.Geometries.Any())
+                {
+                    Console.WriteLine($"Skip bike #{index}. It has already data.");
+
+                    index++;
+                    continue;
+                }
+
                 if (Console.KeyAvailable && Console.ReadKey().Key == ConsoleKey.Q)
                     break;
 
                 Console.WriteLine($"Parse: {index}...");
 
-                var bike = bikes[index];
+                
                 var content = string.Empty;
 
                 try
                 {
-                    content = webClient.GetContent("https://geometrygeeks.bike" + bike.Url);
+                    content = webClient.GetContent("https://geometrygeeks.bike" + bike.Url, 10000);
                 }
                 catch (WebException ex)
                 {
+                    var errorResponse = ex.Response as HttpWebResponse;
+                    if(errorResponse != null && errorResponse.StatusCode == HttpStatusCode.NotFound)
+                    {
+                        Console.WriteLine("404 Not Found. Skip.");
+
+                        index++;
+                        continue;
+                    }
+
                     if (ex.Status == WebExceptionStatus.Timeout)
                     {
                         Console.WriteLine("Timeout. Update client...");
@@ -47,6 +67,23 @@ namespace GeometryParser
                     throw;
                 }
 
+                var document = new HtmlDocument();
+                document.LoadHtml(content);
+
+                var documentNode = document.DocumentNode;
+
+                var geometries = documentNode.SelectNodes("//th")
+                                             ?.Skip(1)
+                                             ?.Select(n => new Geometry(n.InnerText.Trim()))
+                                             ?.ToList();
+
+                if(geometries == null || geometries.Count == 0)
+                {
+                    Console.WriteLine("No data. Skip...");
+                    index++;
+                    continue;
+                }
+
                 if (content.Contains("nonsense"))
                 {
                     Console.WriteLine($"Data is wrong ({index}). Update client...");
@@ -54,22 +91,6 @@ namespace GeometryParser
                     webClient.UpdateAll();
                     continue;
                 }
-
-                var document = new HtmlDocument();
-                document.LoadHtml(content);
-
-                var documentNode = document.DocumentNode;
-
-                if (documentNode.SelectSingleNode("table") == null)
-                {
-                    index++;
-                    continue;
-                }
-                    
-
-                var geometries = documentNode.SelectNodes("//th").Skip(1)
-                                             .Select(n => new Geometry(n.InnerText.Trim()))
-                                             .ToList();
 
                 var rows = documentNode.SelectNodes("//tr").Skip(2);
 
