@@ -10,3 +10,5 @@
 /GeometryParser/bin
 /GeometryParser.DAL/obj
 /GeometryParser.DAL/bin
+/GeometryParser.Viewer/obj
+/GeometryParser.Viewer/bin

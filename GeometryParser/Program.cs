@@ -3,7 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using GeometryParser.DAL;
-using GeometryParser.Serialization;
+using GeometryParser.DAL.Serialization;
 using HtmlAgilityPack;
 using WebClient = GeometryParser.Web.WebClient;
 

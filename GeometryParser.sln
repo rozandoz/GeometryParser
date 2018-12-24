@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeometryParser", "GeometryP
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeometryParser.DAL", "GeometryParser.DAL\GeometryParser.DAL.csproj", "{F855E509-48F5-4797-8A12-C460B69C2691}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeometryParser.Viewer", "GeometryParser.Viewer\GeometryParser.Viewer.csproj", "{2A1BCAEA-C97B-4E07-9ED8-0370C446E8ED}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{F855E509-48F5-4797-8A12-C460B69C2691}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F855E509-48F5-4797-8A12-C460B69C2691}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F855E509-48F5-4797-8A12-C460B69C2691}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A1BCAEA-C97B-4E07-9ED8-0370C446E8ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A1BCAEA-C97B-4E07-9ED8-0370C446E8ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A1BCAEA-C97B-4E07-9ED8-0370C446E8ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A1BCAEA-C97B-4E07-9ED8-0370C446E8ED}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
